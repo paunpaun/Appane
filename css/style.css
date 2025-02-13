@@ -49,6 +49,7 @@ small {font-size: 0.707rem; /* 11.36px */}
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-flow: column nowrap;
 }
 
 .header{

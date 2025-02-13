@@ -1,5 +1,3 @@
-
-
 <html>
     <head>
 
@@ -22,11 +20,12 @@
         ?>
 
     <div class="buttons-container">
-        <button id="new-product"><h4>Visualizza i prodotti</h4></button>
-        <button id="publish-menu"><h4>Pubblica nuovo menu</h4></button>
-        <button id="see-clients"><h4>Visualizza i clienti</h4></button>
-        <button id="view-orders"><h4>Visualizza gli ordini</h4></button>
-        <button id="view-statistics"><h4>Visualizza riepilogo</h4></button>
+        <div class="cliente">
+            <h4>Cliente</h4>
+            <div class="dettagli ">
+
+            </div>
+        </div>
     </div>
     </div>
     
