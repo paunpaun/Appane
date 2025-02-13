@@ -3,7 +3,7 @@ body {
   width: 100vw;
   height: 100vh;
   margin: 0;
-  padding: 1em;
+  padding: 0;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
@@ -74,4 +74,9 @@ small {font-size: 0.707rem; /* 11.36px */}
   height: 500px;
   background-color: var(--primary);
 
+}
+
+.menu-container-header{
+  display: flex;
+  justify-content: center;
 }
