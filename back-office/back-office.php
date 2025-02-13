@@ -14,16 +14,16 @@
    
     <?php
     if (isset($_POST['username'])){
-        echo "<h2>{$_POST['username']}</h2>";
+        echo "<h3>{$_POST['username']}</h3>";
     }
     ?>
 
     <div class="buttons-container">
-        <button id="new-product"><h3>Visualizza i prodotti</h3></button>
-        <button id="publish-menu"><h3>Pubblica nuovo menu</h3></button>
-        <button id="see-clients"><h3>Visualizza i clienti</h3></button>
-        <button id="view-orders"><h3>Visualizza gli ordini</h3></button>
-        <button id="view-statistics"><h3>Visualizza riepilogo</h3></button>
+        <button id="new-product"><h4>Visualizza i prodotti</h4></button>
+        <button id="publish-menu"><h4>Pubblica nuovo menu</h4></button>
+        <button id="see-clients"><h4>Visualizza i clienti</h4></button>
+        <button id="view-orders"><h4>Visualizza gli ordini</h4></button>
+        <button id="view-statistics"><h4>Visualizza riepilogo</h4></button>
     </div>
 
     </body>
