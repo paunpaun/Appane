@@ -14,7 +14,7 @@
    
     <?php
     if (isset($_POST['username'])){
-        echo "<h3>{$_POST['username']}</h3>";
+        echo "<h2>{$_POST['username']}</h2>";
     }
     ?>
 

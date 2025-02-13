@@ -17,12 +17,12 @@ body {
   --accent: #c85b51;
 }
 
-h1, h2{
+h1, h2, h3{
   font-family: 'Dancing Script';
   font-weight: 700;
 }
 
-h3, h4, h5{
+h4, h5{
   font-family: 'Poppins';
   font-weight: 400;
 } 
