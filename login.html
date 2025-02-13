@@ -1,49 +1,3 @@
-<?php
-session_start();
-$connessione = mysqli_connect("localhost", "root", "", "ticketone");
-
-if (!$connessione) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-
-$username = $_SESSION['username'] ?? '';
-$password = $_SESSION['password'] ?? '';
-
-if (isset($_POST['login'])) {
-    $_SESSION['username'] = $_POST['username'];
-    $_SESSION['password'] = $_POST['password'];
-
-    if (!empty($_SESSION['username']) && !empty($_SESSION['password'])) {
-
-        $stmt = mysqli_prepare($connessione, "SELECT * FROM tutenti WHERE mail = ? AND password = ?");
-
-        if ($stmt === false) {
-            die("Error preparing statement: " . mysqli_error($connessione));
-        }
-
-        mysqli_stmt_bind_param($stmt, "ss", $_SESSION['username'], $_SESSION['password']);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
-
-        $num = mysqli_num_rows($result);
-        if ($num > 0) {
-            $arr = mysqli_fetch_array($result);
-            $_SESSION['idUser'] = $arr['id'];
-            $_SESSION['login'] = true;
-            header('Location: index.php');
-            exit;
-        } else {
-            $message = "User not found!";
-        }
-        mysqli_stmt_close($stmt);
-
-    } else {
-        $message = "Please provide both username and password!";
-    }
-}
-mysqli_close($connessione);
-?>
-
 <!DOCTYPE html>
 <html>
 
@@ -95,9 +49,6 @@ mysqli_close($connessione);
         </div>
     </div>
     <div>
-        <?php if (isset($message)): ?>
-            <p><?php echo htmlspecialchars($message); ?></p>
-        <?php endif; ?>
     </div>
     <footer class="footer container-login100-form-btn">
         <h5>serban razvan</h5>
