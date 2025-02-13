@@ -11,7 +11,7 @@
 <body>
     <header class="header">
         <div class="logo">logo</div>
-        <div class="header-text">text</div>
+        <div class="header-text"><h1>TEXT</h1></div>
     </header>
     <div class="main-content">
         body
