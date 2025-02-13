@@ -13,7 +13,7 @@
 <body>
     <header class="header">
         <div class="logo">
-            <img src="../assets/img/download.png" alt="">
+            <img src="../assets/img/Appane_logo.png" alt="">
         </div>
         <div class="header-text">
             <h1>Title</h1>
