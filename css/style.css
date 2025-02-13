@@ -46,6 +46,9 @@ small {font-size: 0.707rem; /* 11.36px */}
 .main-content{
   height: 100%;
   background-color: var(--background);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .header{
@@ -66,4 +69,16 @@ small {font-size: 0.707rem; /* 11.36px */}
   display: flex;
   justify-content: center;
   background-color: var(--primary);
+}
+
+.main-content .main-content-menu-container{
+  width: 500px;
+  height: 500px;
+  background-color: var(--primary);
+
+}
+
+.menu-container-header{
+  display: flex;
+  justify-content: center;
 }

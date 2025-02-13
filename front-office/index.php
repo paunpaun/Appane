@@ -20,7 +20,11 @@
         </div>
     </header>
     <div class="main-content">
-        body
+        <div class="main-content-menu-container">
+            <header class="menu-container-header">
+                <h2>menu container</h2>
+            </header>
+        </div>
     </div>
     <footer class="footer">
         @serbanRazban Paunz
