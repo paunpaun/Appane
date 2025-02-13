@@ -43,10 +43,12 @@ small {font-size: 0.707rem; /* 11.36px */}
 
 .main-content{
   height: 100%;
+  background-color: var(--background);
 }
 
 .header{
   display: flex;
+  background-color: var(--primary);
 }
 
 .header .header-text{
@@ -56,4 +58,10 @@ small {font-size: 0.707rem; /* 11.36px */}
 
 .header logo{
   flex: 2;
+}
+
+.footer{
+  display: flex;
+  justify-content: center;
+  background-color: var(--primary);
 }
