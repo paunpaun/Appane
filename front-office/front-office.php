@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     
     <meta charset="UTF-8">
@@ -30,7 +30,7 @@
         </div>
     </div>
     <footer class="footer">
-        @serbanRazban Paunz
+        @serbanRazban StefanPaun
     </footer>
 </body>
 </html>
