@@ -1,4 +1,6 @@
-<?php  ?>
+<?php  
+session_start();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,9 +19,23 @@
         </div>
         <div class="header-text">
             <h1>Title</h1>
+            <?php  
+            if(isset($_SESSION["idUser"])){
+                echo "benvenuto ".$_SESSION["idUser"]." bella";
+            }
+            ?>
         </div>
     </header>
     <div class="main-content">
+        <div class="main-content-navigation_bar">
+        <?php  
+            if(isset($_SESSION["idUser"])){
+                echo "<a href='logout.php'>Logout</a>";
+            }else{
+                echo "<a href='login.php'>Login</a>";
+            }
+            ?>
+        </div>
         <div class="main-content-menu-container">
             <header class="menu-container-header">
                 <h2>menu container</h2>
