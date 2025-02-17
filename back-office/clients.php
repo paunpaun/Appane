@@ -1,3 +1,6 @@
+<?php
+    session_start()
+?>
 <html>
     <head>
 
@@ -10,14 +13,14 @@
 
     <header class="header">
         <h1>Title</h1>
-    </header>
-    
-    <div class="main-content">
         <?php
         if (isset($_POST['username'])){
             echo "<h3>{$_POST['username']}</h3>";
         }
         ?>
+    </header>
+    
+    <div class="main-content">
 
     <div class="buttons-container">
         <div class="cliente">

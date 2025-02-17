@@ -1,5 +1,8 @@
 <?php
-    session_start()
+    session_start();
+    if (isset($_POST['username'])){
+        $_SESSION['username'] = $_POST['username'];
+    }
 ?>
 
 <html>
@@ -14,14 +17,12 @@
 
     <header class="header">
         <h1>Title</h1>
-    </header>
-    
-    <div class="main-content">
         <?php
-        if (isset($_POST['username'])){
-            echo "<h3>{$_POST['username']}</h3>";
+        if (isset($_SESSION['username'])){
+            echo "<h3>{$_SESSION['username']}</h3>";
         }
         ?>
+    </header>
 
     <div class="buttons-container">
         <button id="view-products" onclick="window.location.href = 'products.php'"><h4>Visualizza i prodotti</h4></button>
