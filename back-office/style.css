@@ -1,12 +1,9 @@
-html,
 body {
-  width: 100vw;
   height: 100vh;
   margin: 0;
-  padding: 0;
-  overflow-x: hidden;
+  padding: 1em;
   display: flex;
-  flex-direction: column;
+  flex-flow: column nowrap;
   font-family: 'Poppins';
   font-weight: 400;
 
@@ -29,19 +26,19 @@ h4, h5{
   font-weight: 400;
 } 
 
-html {font-size: 100%;} /* 16px */
+html {font-size: 100%;}
 
-h1 {font-size: 5.652rem; /* 90.4px */}
+h1 {font-size: 5.652rem;}
 
-h2 {font-size: 3.997rem; /* 64px */}
+h2 {font-size: 3.997rem;}
 
-h3 {font-size: 2.827rem; /* 45.28px */}
+h3 {font-size: 2.827rem;}
 
-h4 {font-size: 1.999rem; /* 32px */}
+h4 {font-size: 1.999rem;}
 
-h5 {font-size: 1.414rem; /* 22.56px */}
+h5 {font-size: 1.414rem;}
 
-small {font-size: 0.707rem; /* 11.36px */}
+small {font-size: 0.707rem;}
 
 .main-content{
   height: 100%;
@@ -50,16 +47,13 @@ small {font-size: 0.707rem; /* 11.36px */}
   justify-content: center;
   align-items: center;
   flex-flow: column nowrap;
+  flex: 1;
 }
 
 .header{
   display: flex;
   background-color: var(--primary);
-  max-height: 12em;
-}
-
-.header .header-text{
-  flex: 1;
+  flex: 0.2;
   color: var(--text);
 }
 
@@ -76,6 +70,7 @@ small {font-size: 0.707rem; /* 11.36px */}
   display: flex;
   justify-content: center;
   background-color: var(--primary);
+  flex: 0.1;
 }
 
 .main-content .main-content-menu-container{

@@ -14,8 +14,8 @@
     <header class="header">
         <h1>Title</h1>
         <?php
-        if (isset($_SESSION['username'])){
-            echo "<h3>{$_SESSION['username']}</h3>";
+        if (isset($_POST['username'])){
+            echo "<h3>{$_POST['username']}</h3>";
         }
         ?>
     </header>
@@ -24,7 +24,7 @@
 
     <div class="buttons-container">
         <div class="cliente">
-            <h4>Ordini</h4>
+            <h4>Clienti</h4>
             <div class="dettagli ">
 
             </div>
