@@ -21,7 +21,7 @@
 
     <div class="buttons-container">
         <div class="cliente">
-            <h4>Ordini</h4>
+            <h4>Prodotti</h4>
             <div class="dettagli ">
 
             </div>
