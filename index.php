@@ -1,4 +1,4 @@
 <?php
-    header("Location: front-office/index.php");
+    header("Location: front-office/front-office.php");
     exit();
 ?>
