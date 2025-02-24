@@ -1,5 +1,6 @@
 <?php  
 session_start();
+include '../database/recall.php';
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +22,7 @@ session_start();
             <h1>Title</h1>
             <?php  
             if(isset($_SESSION["idUser"])){
-                echo "benvenuto ".$_SESSION["idUser"]." bella";
+                echo "benvenuto ".$_SESSION["idUser"];
             }
             ?>
         </div>
@@ -40,8 +41,10 @@ session_start();
             <header class="menu-container-header">
                 <h2>menu container</h2>
             </header>
-            <div class="menu-container-body">
-                container body
+            <div class="menu-container-body grid-2-cols">
+                <?php  
+                selectProdotto(); 
+                ?>
             </div>
         </div>
     </div>

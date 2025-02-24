@@ -30,3 +30,25 @@ function ricercaUtenti($email, $password){
     }
 }
 
+function selectProdotto() {
+    global $connessione;
+    $sql = "SELECT nome, descrizione, prezzo, grandezza, macrotipologia FROM tProdotto WHERE 1";
+
+    $stmt = $connessione->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            echo '<div class="grid-item">';
+            echo '<h3>' . htmlspecialchars($row['nome']) . '</h3>';
+            echo '<p>' . htmlspecialchars($row['descrizione']) . '</p>';
+            echo '<p>Prezzo: ' . htmlspecialchars($row['prezzo']) . '€</p>';
+            echo '<p>Grandezza: ' . htmlspecialchars($row['grandezza']) . '</p>';
+            echo '<p>Macrotipologia: ' . htmlspecialchars($row['macrotipologia']) . '</p>';
+            echo '</div>';
+        }
+    } else {
+        echo '<p>No products found.</p>';
+    }
+    $stmt->close();
+}
