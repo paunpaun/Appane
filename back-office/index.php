@@ -1,4 +1,7 @@
 <?php
+
+    require_once("conn.php");
+
     session_start();
     if (isset($_POST['username'])){
         $_SESSION['username'] = $_POST['username'];
