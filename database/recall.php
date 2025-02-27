@@ -41,6 +41,7 @@ function selectProdotto() {
         while ($row = $result->fetch_assoc()) {
             echo '<div class="grid-item">';
             echo '<h3>' . htmlspecialchars($row['nome']) . '</h3>';
+            echo '<img src="img/' . htmlspecialchars($row['nome']) . '.jpg" alt="">';
             echo '<p>' . htmlspecialchars($row['descrizione']) . '</p>';
             echo '<p>Prezzo: ' . htmlspecialchars($row['prezzo']) . '€</p>';
             echo '<p>Grandezza: ' . htmlspecialchars($row['grandezza']) . '</p>';
