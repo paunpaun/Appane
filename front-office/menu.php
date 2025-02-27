@@ -16,7 +16,9 @@ include '../database/recall.php';
 <body>
     <header class="header">
         <div class="logo">
-            <img src="img/Appane_logo.png" alt="">
+            <a href="index.php">
+                <img src="img/Appane_logo.png" alt="Appane Logo">
+            </a> 
         </div>
         <div class="header-text">
             <h1>Title</h1>

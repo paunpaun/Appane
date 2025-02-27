@@ -8,7 +8,6 @@ include '../database/recall.php';
 <head>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
@@ -16,7 +15,9 @@ include '../database/recall.php';
 <body>
     <header class="header">
         <div class="logo">
-            <img src="img/Appane_logo.png" alt="">
+            <a href="index.php">
+                <img src="img/Appane_logo.png" alt="Appane Logo">
+            </a>
         </div>
         <div class="header-text">
             <h1>Title</h1>
