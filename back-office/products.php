@@ -7,6 +7,7 @@
         $_SESSION['username'] = $_POST['username'];
     }
 ?>
+
 <html>
     <head>
 
@@ -18,24 +19,33 @@
     <body>
 
     <header class="header">
-        <h1>Title</h1>
+        <h1 onclick="window.location.href = 'index.php'">Title</h1>
         <?php
-        if (isset($_SESSION['username'])){
-            echo "<h3>{$_SESSION['username']}</h3>";
+        if (isset($_POST['username'])){
+            echo "<h3>{$_POST['username']}</h3>";
         }
         ?>
     </header>
     
     <div class="main-content">
+        <h4>Prodotti</h4>
+        <div class="records-scroll">
+            <?php
+                $query = "SELECT nome,prezzo,macrotipologia,grandezza,descrizione,'path' FROM tProdotto";
+                $result = mysqli_query($db_remoto, $query);
 
-    <div class="buttons-container">
-        <div class="cliente">
-            <h4>Prodotti</h4>
-            <div class="dettagli ">
-
-            </div>
+                while($prodotto = mysqli_fetch_assoc($result)){
+                    echo "  <div style='flex: 0.4'>
+                                <img src='{$prodotto['path']}' style='width: 3em; height: 3em;'>
+                                <h1>{$prodotto['nome']}</h1>
+                                <p>prezzo: {$prodotto['prezzo']}€</p>
+                                <p>macrotipologia: {$prodotto['macrotipologia']}</p>
+                                <p>grandezza: {$prodotto['grandezza']}€</p>
+                                <p>descrizione: {$prodotto['descrizione']}</p>
+                            </div>";
+                }
+            ?>
         </div>
-    </div>
     </div>
     
 

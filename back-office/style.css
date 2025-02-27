@@ -40,8 +40,22 @@ h5 {font-size: 1.414rem;}
 
 small {font-size: 0.707rem;}
 
+.header{
+  display: flex;
+  background-color: var(--primary);
+  flex: 0.2;
+  color: var(--text);
+}
+
+.header h1{
+  cursor: pointer;
+}
+
+.logo{
+  max-width: 15em;
+}
+
 .main-content{
-  height: 100%;
   background-color: var(--background);
   display: flex;
   justify-content: center;
@@ -50,20 +64,9 @@ small {font-size: 0.707rem;}
   flex: 1;
 }
 
-.header{
-  display: flex;
-  background-color: var(--primary);
-  flex: 0.2;
-  color: var(--text);
-}
-
-.logo{
-  max-width: 15em;
-}
-
-.logo img{
-  width: 100%;
-  height: 100%;
+.records-scroll{
+  flex: 1;
+  overflow-y: hidden;
 }
 
 .footer{
@@ -72,31 +75,3 @@ small {font-size: 0.707rem;}
   background-color: var(--primary);
   flex: 0.1;
 }
-
-.main-content .main-content-menu-container{
-  width: 500px;
-  height: 500px;
-  background-color: var(--primary);
-  flex-direction: column;
-  display: flex;
-  align-items: center;
-}
-
-.menu-container-header{
-  display: flex;
-  justify-content: center;
-  height: 20%;
-}
-
-.menu-container-header h2{
-  margin: 0px;
-  padding: 0px;
-  border: 0px;
-}
-
-.menu-container-body{
-  width: 90%;
-  height: 70%;
-  background-color: var(--background);
- }
-
