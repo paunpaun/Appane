@@ -32,7 +32,7 @@ function ricercaUtenti($email, $password){
 
 function selectProdotto() {
     global $connessione;
-    $sql = "SELECT nome, descrizione, prezzo, grandezza, macrotipologia FROM tProdotto WHERE 1";
+    $sql = "SELECT nome, descrizione, prezzo, grandezza, macrotipologia, path FROM tProdotto WHERE 1";
 
     $stmt = $connessione->prepare($sql);
     $stmt->execute();
@@ -41,11 +41,13 @@ function selectProdotto() {
         while ($row = $result->fetch_assoc()) {
             echo '<div class="grid-item">';
             echo '<h3>' . htmlspecialchars($row['nome']) . '</h3>';
-            echo '<img src="img/' . htmlspecialchars($row['nome']) . '.jpg" alt="">';
+            echo '<img src="' . htmlspecialchars($row['path']) . '" alt="">';
+            echo '<div class="product-details">';
             echo '<p>' . htmlspecialchars($row['descrizione']) . '</p>';
             echo '<p>Prezzo: ' . htmlspecialchars($row['prezzo']) . '€</p>';
             echo '<p>Grandezza: ' . htmlspecialchars($row['grandezza']) . '</p>';
             echo '<p>Macrotipologia: ' . htmlspecialchars($row['macrotipologia']) . '</p>';
+            echo '</div>';
             echo '</div>';
         }
     } else {

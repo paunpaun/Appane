@@ -27,11 +27,27 @@ include '../database/recall.php';
             ?>
         </div>
     </header>
-    <!-- Hero Section -->
-    <div class="hero">
-        <h1>Welcome to Appane</h1>
-        <p>Your one-stop shop for all your needs</p>
-        <a href="menu.php" class="hero-button">Shop Now</a>
+
+    <div class="main-content">
+        <div class="main-content-navigation_bar">
+        <?php  
+            if(isset($_SESSION["idUser"])){
+                echo "<a style='margin-left:10px'; href='logout.php'>Logout</a>";
+            }else{
+                echo "<a style='margin-left:10px'; href='login.php'>Login</a>";
+            }
+            ?>
+        </div>
+        <div class="main-content-menu-container">
+            <header class="menu-container-header">
+                <h2>menu container</h2>
+            </header>
+            <div class="menu-container-body">
+                <?php  
+                selectProdotto(); 
+                ?>
+            </div>
+        </div>
     </div>
     <footer class="footer">
         @serbanRazban StefanPaun
