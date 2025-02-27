@@ -2,7 +2,7 @@
 $host = '192.168.8.103';
 $user = 'quintaf';
 $pass = 'Qu!nta';
-$db_name = 'prenotazioni_paun';
+$db_name = 'appane_paun';
 
 $db_remoto = mysqli_connect($host, $user, $pass, $db_name);
 
