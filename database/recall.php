@@ -4,10 +4,11 @@ include 'connection.php';
 $mysql = new MysqlClass();
 $connessione = $mysql->connetti();
 
-function ricercaUtenti($email, $password){
+function ricercaUtenti($email, $password)
+{
     global $connessione;
     $sql = "SELECT idUser FROM tCliente WHERE email = ? AND password = ?";
-    
+
     if ($stmt = $connessione->prepare($sql)) {
         $stmt->bind_param("ss", $email, $password);
         $stmt->execute();
@@ -17,7 +18,7 @@ function ricercaUtenti($email, $password){
             $row = $result->fetch_assoc();
             $id = $row['idUser'];
             session_start();
-            $_SESSION["idUser"] = $id;  
+            $_SESSION["idUser"] = $id;
             header("Location: index.php");
             exit();
         } else {
@@ -30,9 +31,10 @@ function ricercaUtenti($email, $password){
     }
 }
 
-function selectProdotto() {
+function selectProdotto()
+{
     global $connessione;
-    $sql = "SELECT nome, descrizione, prezzo, grandezza, macrotipologia, path FROM tProdotto WHERE 1";
+    $sql = "SELECT idProdotto, nome, descrizione, prezzo, grandezza, macrotipologia, path FROM tProdotto WHERE 1";
 
     $stmt = $connessione->prepare($sql);
     $stmt->execute();
@@ -47,6 +49,7 @@ function selectProdotto() {
             echo '<p>Prezzo: ' . htmlspecialchars($row['prezzo']) . '€</p>';
             echo '<p>Grandezza: ' . htmlspecialchars($row['grandezza']) . '</p>';
             echo '<p>Macrotipologia: ' . htmlspecialchars($row['macrotipologia']) . '</p>';
+            echo '<button class="add-to-cart" data-id="' . htmlspecialchars($row['idProdotto']) . '">Aggiungi al carrello</button>';
             echo '</div>';
             echo '</div>';
         }

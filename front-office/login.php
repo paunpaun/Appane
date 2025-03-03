@@ -1,7 +1,6 @@
-<?php 
+<?php
 session_start();
 include '../database/recall.php';
-
 
 $errore = ""; // Variabile per mostrare eventuali errori
 
@@ -15,12 +14,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <link rel="stylesheet" href="css/style.css">  
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 </head>
+
 <body>
     <header class="header">
         <div class="logo">
@@ -32,20 +34,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <h1>Title</h1>
         </div>
     </header>
-
     <div class="main-content">
-        <div class="main-content-navigation_bar">         
+        <div class="main-content-navigation_bar">
             <a href="index.php">Logout</a>
         </div>
-
-        <div class="main-content-login-container">
-            <header>Login</header>
-            <?php if (!empty($errore)) echo "<p style='color: red; text-align: center;'>$errore</p>"; ?>
-            <form class="main-content-login-container-content" method="POST" action="login.php">
-                <input type="text" name="email" placeholder="Username..." required>
-                <input type="password" name="password" placeholder="Password..." required>
-                <input type="submit" value="Login">
-            </form>
+        <div class="main-content-login">
+            <div class="main-content-login-container">
+                <header>Login</header>
+                <?php if (!empty($errore))
+                    echo "<p style='color: red; text-align: center;'>$errore</p>"; ?>
+                <form class="main-content-login-container-content" method="POST" action="login.php">
+                    <input type="text" name="email" placeholder="Username..." required>
+                    <input type="password" name="password" placeholder="Password..." required>
+                    <input type="submit" value="Login">
+                </form>
+                <p>Non hai un account? <a href="register.php">Registrati</a></p>
+            </div>
         </div>
     </div>
 
@@ -53,4 +57,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         @serbanRazban StefanPaun
     </footer>
 </body>
+
 </html>
