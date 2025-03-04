@@ -52,8 +52,8 @@ include '../database/recall.php';
     <footer class="footer">
         @serbanRazban StefanPaun
     </footer>
-
-    <script src="js/scripts.js"></script>
+    <script src="js/menu.js"></script>
+    <script src="js/carrello.js"></script>
 </body>
 
 </html>
