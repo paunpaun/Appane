@@ -1,31 +1,35 @@
 <?php
-
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 header('Content-Type: application/json');
-
-function aggiornaQuantita($connessione, $idListaProdotto, $delta)
+function aggiornaQuantita($idProdotto, $delta)
 {
-
+    if (!isset($_SESSION['cart']) || !isset($_SESSION['cart'][$idProdotto])) {
+        return [
+            'success' => false,
+            'message' => 'Prodotto non trovato nel carrello',
+        ];
+    }
     try {
-        $sql = "SELECT quantita FROM tListaProdotto WHERE idListaProdotto = ?";
-        $stmt = $connessione->prepare($sql);
-        $stmt->bind_param("i", $idListaProdotto);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-            $nuovaQuantita = max(1, $row['quantita'] + $delta);
-            $sql = "UPDATE tListaProdotto SET quantita = ? WHERE idListaProdotto = ?";
-            $stmt = $connessione->prepare($sql);
-            $stmt->bind_param("ii", $nuovaQuantita, $idListaProdotto);
-
-            if ($stmt->execute()) {
-                return ['success' => true];
-            }
+        $nuovaQuantita = $_SESSION['cart'][$idProdotto] + $delta;
+        if ($nuovaQuantita < 1) {
+            return [
+                'success' => false,
+                'message' => 'La quantità non può essere inferiore a 1',
+            ];
         }
-        return ['success' => false, 'message' => 'Prodotto non trovato'];
+        $_SESSION['cart'][$idProdotto] = $nuovaQuantita;
+        return [
+            'success' => true,
+            'message' => 'Quantità aggiornata con successo',
+        ];
     } catch (Exception $e) {
-        return ['success' => false, 'message' => $e->getMessage()];
+        return [
+            'success' => false,
+            'message' => $e->getMessage(),
+            'quantita' => $_SESSION['cart'][$idProdotto],
+        ];
     }
 }

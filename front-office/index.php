@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../database/recall.php';
+include 'database/recall.php';
 ?>
 
 <!DOCTYPE html>

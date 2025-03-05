@@ -1,46 +1,47 @@
 <?php
-
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-function visualizzaCarrello($connessione)
+require_once '../database/recall.php';
+header('Content-Type: application/json');
+
+
+function visualizzaCarrello()
 {
-    if (!isset($_SESSION['idUser'])) {
-        return ['success' => false, 'message' => 'Utente non loggato'];
+    if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
+        return [
+            'success' => true,
+            'prodotti' => [],
+            'totale' => 0,
+        ];
     }
 
-    try {
-        $sql = "SELECT lp.idListaProdotto, lp.quantita, p.nome, p.prezzo, p.path, p.descrizione 
-                FROM tListaProdotto lp 
-                JOIN tProdotto p ON lp.idProdotto = p.idProdotto 
-                JOIN tOrdine o ON lp.idOrdine = o.idOrdine 
-                WHERE o.idUser = ? AND o.commento IS NULL AND o.indirizzo IS NULL";
+    $prodotti = [];
+    $totale = 0;
 
-        $stmt = $connessione->prepare($sql);
-        $stmt->bind_param("i", $_SESSION['idUser']);
-        $stmt->execute();
-        $result = $stmt->get_result();
+    foreach ($_SESSION['cart'] as $idProdotto => $quantita) {
+        $dettagliProdotto = selectProdottiById($idProdotto);
+        if ($dettagliProdotto) {
+            $prodotto = $dettagliProdotto[0];
+            $subtotale = $prodotto['prezzo'] * $quantita;
+            $totale += $subtotale;
 
-        $prodotti = [];
-        $totale = 0;
-
-        while ($row = $result->fetch_assoc()) {
-            $subtotale = $row['prezzo'] * $row['quantita'];
             $prodotti[] = [
-                'idListaProdotto' => $row['idListaProdotto'],
-                'nome' => $row['nome'],
-                'descrizione' => $row['descrizione'],
-                'prezzo' => $row['prezzo'],
-                'quantita' => $row['quantita'],
-                'path' => $row['path'],
+                'idProdotto' => $idProdotto,
+                'nome' => $prodotto['nome'],
+                'descrizione' => $prodotto['descrizione'],
+                'prezzo' => $prodotto['prezzo'],
+                'path' => $prodotto['path'],
+                'quantita' => $quantita,
                 'subtotale' => $subtotale,
             ];
-            $totale += $subtotale;
         }
-
-        return ['success' => true, 'prodotti' => $prodotti, 'totale' => $totale];
-    } catch (Exception $e) {
-        return ['success' => false, 'message' => $e->getMessage()];
     }
+
+    return [
+        'success' => true,
+        'prodotti' => $prodotti,
+        'totale' => $totale,
+    ];
 }

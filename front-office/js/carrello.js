@@ -1,4 +1,4 @@
-let api_path = "./api/Request_Handler.php";
+const api_path = "./api/Request_Handler.php";
 
 document.addEventListener("DOMContentLoaded", function () {
   caricaCarrello();
@@ -26,7 +26,7 @@ function caricaCarrello() {
       }
 
       if (data.success) {
-        if (data.prodotti.length === 0) {
+        if (!data.prodotti || data.prodotti.length === 0) {
           cartContainer.innerHTML =
             '<p class="cart-empty">Il carrello è vuoto</p>';
         } else {
@@ -34,25 +34,26 @@ function caricaCarrello() {
           data.prodotti.forEach((prodotto) => {
             cartItemsHtml += `
               <div class="cart-item">
-                <img src="${htmlspecialchars(
-                  prodotto.path
-                )}" alt="${htmlspecialchars(prodotto.nome)}">
+                <img src="${prodotto.path || ""}" alt="${prodotto.nome || ""}">
                 <div class="cart-item-details">
-                  <h3>${htmlspecialchars(prodotto.nome)}</h3>
-                  <p>${htmlspecialchars(prodotto.descrizione)}</p>
-                  <p>Prezzo: €${number_format(prodotto.prezzo, 2)}</p>
+                  <h3>${prodotto.nome || ""}</h3>
+                  <p>${prodotto.descrizione || ""}</p>
+                  <p>Prezzo: €${number_format(prodotto.prezzo || 0, 2)}</p>
                   <div class="quantity-controls">
                     <button class="quantity-btn" onclick="aggiornaQuantita(${
-                      prodotto.idListaProdotto
+                      prodotto.idProdotto
                     }, -1)">-</button>
                     <span class="quantity">${prodotto.quantita}</span>
                     <button class="quantity-btn" onclick="aggiornaQuantita(${
-                      prodotto.idListaProdotto
+                      prodotto.idProdotto
                     }, 1)">+</button>
                   </div>
-                  <p>Subtotale: €${number_format(prodotto.subtotale, 2)}</p>
+                  <p>Subtotale: €${number_format(
+                    prodotto.subtotale || 0,
+                    2
+                  )}</p>
                   <button class="remove-btn" onclick="rimuoviProdotto(${
-                    prodotto.idListaProdotto
+                    prodotto.idProdotto
                   })">Rimuovi</button>
                 </div>
               </div>
@@ -61,22 +62,25 @@ function caricaCarrello() {
           cartItemsHtml += "</div>";
           cartItemsHtml += `
             <div class="cart-total">
-              <h3>Totale: €${number_format(data.totale, 2)}</h3>
-              <button class="checkout-btn" onclick="window.location.href='checkout.php'">Procedi all'acquisto</button>
+              <h3>Totale: €${number_format(data.totale || 0, 2)}</h3>
+              <button class="checkout-btn" onclick="window.location.href='order.php'">Procedi all'acquisto</button>
             </div>
           `;
           cartContainer.innerHTML = cartItemsHtml;
         }
       } else {
-        cartContainer.innerHTML = `<p class="error-message">Errore: ${htmlspecialchars(
-          data.message
-        )}</p>`;
+        cartContainer.innerHTML = `<p class="error-message">Errore: ${
+          data.message || "Errore sconosciuto"
+        }</p>`;
       }
     })
     .catch((error) => {
       console.error("Error:", error);
-      document.getElementById("cart-container").innerHTML =
-        '<p class="error-message">Errore nella comunicazione con il server</p>';
+      const cartContainer = document.getElementById("cart-container");
+      if (cartContainer) {
+        cartContainer.innerHTML =
+          '<p class="error-message">Errore nella comunicazione con il server</p>';
+      }
     });
 }
 
@@ -110,13 +114,13 @@ function aggiungiAlCarrello(productId, quantity) {
     });
 }
 
-function aggiornaQuantita(idListaProdotto, delta) {
+function aggiornaQuantita(idProdotto, delta) {
   fetch(api_path, {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },
-    body: `action=update&idListaProdotto=${idListaProdotto}&delta=${delta}`,
+    body: `action=update&idProdotto=${idProdotto}&delta=${delta}`,
   })
     .then((response) => {
       if (!response.ok) {
@@ -137,7 +141,7 @@ function aggiornaQuantita(idListaProdotto, delta) {
     });
 }
 
-function rimuoviProdotto(idListaProdotto) {
+function rimuoviProdotto(idProdotto) {
   if (!confirm("Sei sicuro di voler rimuovere questo prodotto dal carrello?"))
     return;
 
@@ -146,7 +150,7 @@ function rimuoviProdotto(idListaProdotto) {
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },
-    body: `action=remove&idListaProdotto=${idListaProdotto}`,
+    body: `action=remove&idProdotto=${idProdotto}`,
   })
     .then((response) => {
       if (!response.ok) {

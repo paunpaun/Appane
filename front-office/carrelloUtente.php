@@ -29,7 +29,8 @@ session_start();
         <div class="main-content-navigation_bar">
             <a href="menu.php">Torna al Menu</a>
         </div>
-        <div class="main-content-cart-container" id="cart-container">
+        <div class="main-content-cart-container" id="cart-container" style="
+  overflow-y: scroll" ;>
             <!-- Il contenuto del carrello verrà caricato qui tramite JavaScript -->
         </div>
     </div>

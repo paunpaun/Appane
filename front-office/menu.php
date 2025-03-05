@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../database/recall.php';
+include 'database/recall.php';
 ?>
 
 <!DOCTYPE html>
@@ -8,11 +8,12 @@ include '../database/recall.php';
 
 <head>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/ordine.css">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Menu</title>
 </head>
 
 <body>
@@ -23,11 +24,21 @@ include '../database/recall.php';
             </a>
         </div>
         <div class="header-text">
-            <h1>Title</h1>
+            <h1>Menu</h1>
         </div>
     </header>
 
     <div class="main-content">
+        <?php
+        if (isset($_SESSION['success_message'])) {
+            echo '<div class="success-message">' . htmlspecialchars($_SESSION['success_message']) . '</div>';
+            unset($_SESSION['success_message']);
+        }
+        if (isset($_SESSION['error_message'])) {
+            echo '<div class="error-message">' . htmlspecialchars($_SESSION['error_message']) . '</div>';
+            unset($_SESSION['error_message']);
+        }
+        ?>
         <div class="main-content-navigation_bar">
             <?php
             if (isset($_SESSION["idUser"])) {
@@ -54,6 +65,18 @@ include '../database/recall.php';
     </footer>
     <script src="js/menu.js"></script>
     <script src="js/carrello.js"></script>
+    <script>
+        setTimeout(function () {
+            var successMessage = document.querySelector('.success-message');
+            var errorMessage = document.querySelector('.error-message');
+            if (successMessage) {
+                successMessage.style.display = 'none';
+            }
+            if (errorMessage) {
+                errorMessage.style.display = 'none';
+            }
+        }, 5000);
+    </script>
 </body>
 
 </html>
