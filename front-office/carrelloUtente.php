@@ -29,8 +29,7 @@ session_start();
         <div class="main-content-navigation_bar">
             <a href="menu.php">Torna al Menu</a>
         </div>
-        <div class="main-content-cart-container" id="cart-container" style="
-  overflow-y: scroll" ;>
+        <div class="main-content-cart-container cart-container" id="cart-container">
             <!-- Il contenuto del carrello verrà caricato qui tramite JavaScript -->
         </div>
     </div>
@@ -40,6 +39,12 @@ session_start();
     </footer>
 
     <script src="js/carrello.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            caricaCarrello();
+        });
+    </script>
 </body>
 
 </html>

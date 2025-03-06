@@ -34,7 +34,7 @@ function ricercaUtenti($email, $password)
 function selectProdotto()
 {
     global $connessione;
-    $sql = "SELECT idProdotto, nome, descrizione, prezzo, grandezza, macrotipologia, path FROM tProdotto WHERE 1";
+    $sql = "SELECT idProdotto, nome, descrizione, prezzo, grandezza, macrotipologia, path FROM tprodotto WHERE 1";
 
     $stmt = $connessione->prepare($sql);
     $stmt->execute();
@@ -62,7 +62,10 @@ function selectProdotto()
 function selectProdottiById($id)
 {
     global $connessione;
-    $sql = "SELECT idProdotto, nome, descrizione, prezzo, grandezza, macrotipologia, path FROM tProdotto WHERE idProdotto = ?";
+    $sql = "SELECT p.idProdotto, p.nome, p.descrizione, p.prezzo, p.grandezza, p.path, c.nome AS categoria_nome 
+            FROM tProdotto p
+            JOIN tCategoria c ON p.categoria_id = c.id
+            WHERE p.idProdotto = ?";
 
     if ($stmt = $connessione->prepare($sql)) {
         $stmt->bind_param("i", $id);
@@ -78,8 +81,8 @@ function selectProdottiById($id)
                     'descrizione' => $row['descrizione'],
                     'prezzo' => $row['prezzo'],
                     'grandezza' => $row['grandezza'],
-                    'macrotipologia' => $row['macrotipologia'],
                     'path' => $row['path'],
+                    'categoria_nome' => $row['categoria_nome'],
                 ];
             }
             return $prodotti;
@@ -151,6 +154,50 @@ function insertListaProdotto($idProdotto, $quantita, $idOrdine)
         return $result;
     } else {
         return false;
+    }
+}
+
+function visualizzaMenu($categoria_nome = '')
+{
+    global $connessione;
+    $sql = "SELECT p.idProdotto, p.nome, p.descrizione, p.prezzo, p.grandezza, p.path, c.nome AS categoria_nome 
+            FROM tProdotto p
+            JOIN tListaProdottoMenu lpm ON p.idProdotto = lpm.idProdotto
+            JOIN tMenu m ON lpm.idMenu = m.idMenu
+            JOIN tCategoria c ON p.categoria_id = c.id
+            WHERE m.attivo = TRUE";
+
+    if ($categoria_nome) {
+        $sql .= " AND c.nome = ?";
+    }
+
+    if ($stmt = $connessione->prepare($sql)) {
+        if ($categoria_nome) {
+            $stmt->bind_param("s", $categoria_nome);
+        }
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo '<div class="grid-item">';
+                echo '<h3>' . htmlspecialchars($row['nome']) . '</h3>';
+                echo '<img src="' . htmlspecialchars($row['path']) . '" alt="">';
+                echo '<div class="product-details">';
+                echo '<p>' . htmlspecialchars($row['descrizione']) . '</p>';
+                echo '<p>Prezzo: ' . htmlspecialchars($row['prezzo']) . '€</p>';
+                echo '<p>Grandezza: ' . htmlspecialchars($row['grandezza']) . '</p>';
+                echo '<p>Categoria: ' . htmlspecialchars($row['categoria_nome']) . '</p>';
+                echo '<button class="add-to-cart" data-id="' . htmlspecialchars($row['idProdotto']) . '">Aggiungi al carrello</button>';
+                echo '</div>';
+                echo '</div>';
+            }
+        } else {
+            echo '<p>No active menus found.</p>';
+        }
+        $stmt->close();
+    } else {
+        echo "Errore nella query.";
     }
 }
 

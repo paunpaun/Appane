@@ -1,13 +1,13 @@
 <?php
 class MysqlClass
 {
-    private $nomehostSchool = "192.168.8.103";
-    private $nomehost = "localhost";
-    private $nomeuserSchool = "quintaf";
-    private $nomeuser = "root";
-    private $passwordSchool = "Qu!nta";
-    private $password = "";
-    private $database = "appane_paun";
+    private $nomehost = "192.168.8.103";
+    //private $nomehost = "localhost";
+    private $nomeuser = "quintaf";
+    //private $nomeuser = "root";
+    private $password = "Qu!nta";
+    //private $password = "";
+    private $database = "appane_serbanpaun";
 
 
     function connetti()
