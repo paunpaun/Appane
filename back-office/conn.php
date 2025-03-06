@@ -1,8 +1,8 @@
 <?php
-$host = '192.168.8.103';
-$user = 'quintaf';
-$pass = 'Qu!nta';
-$db_name = 'appane_paun';
+$host = 'localhost';
+$user = 'root';
+$pass = '';
+$db_name = 'appane_serbanpaun';
 
 $db_remoto = mysqli_connect($host, $user, $pass, $db_name);
 

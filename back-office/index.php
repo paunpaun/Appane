@@ -19,7 +19,7 @@
     <body>
 
     <header class="header">
-        <h1>Title</h1>
+        <h1 onclick="window.location.href = 'index.php'">Appane</h1>
         <?php
         if (isset($_SESSION['username'])){
             echo "<h3>{$_SESSION['username']}</h3>";
