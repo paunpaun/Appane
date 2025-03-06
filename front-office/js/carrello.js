@@ -1,9 +1,5 @@
 const api_path = "./api/Request_Handler.php";
 
-document.addEventListener("DOMContentLoaded", function () {
-  caricaCarrello();
-});
-
 function caricaCarrello() {
   fetch(api_path, {
     method: "POST",

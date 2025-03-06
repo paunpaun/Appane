@@ -1,6 +1,13 @@
 <?php
 session_start();
 include 'database/recall.php';
+
+$menu_name = '';
+$sql = "SELECT nome FROM tmenu WHERE attivo = TRUE LIMIT 1";
+$result = $connessione->query($sql);
+if ($result && $row = $result->fetch_assoc()) {
+    $menu_name = htmlspecialchars($row['nome']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -51,12 +58,25 @@ include 'database/recall.php';
         </div>
         <div class="main-content-menu-container">
             <header class="menu-container-header">
-                <h2>menu container</h2>
+                <h2><?php echo $menu_name; ?></h2>
             </header>
             <div class="menu-container-body">
-                <?php
-                selectProdotto();
-                ?>
+                <label for="category-select">Seleziona Categoria:</label>
+                <select id="category-select" onchange="filterByCategory()">
+                    <option value="">Tutte</option>
+                    <?php
+                    $sql = "SELECT nome FROM tcategoria";
+                    $result = $connessione->query($sql);
+                    while ($row = $result->fetch_assoc()) {
+                        echo '<option value="' . htmlspecialchars($row['nome']) . '">' . htmlspecialchars($row['nome']) . '</option>';
+                    }
+                    ?>
+                </select>
+                <div id="products-container">
+                    <?php
+                    visualizzaMenu();
+                    ?>
+                </div>
             </div>
         </div>
     </div>
@@ -65,17 +85,34 @@ include 'database/recall.php';
     </footer>
     <script src="js/menu.js"></script>
     <script src="js/carrello.js"></script>
+
     <script>
-        setTimeout(function () {
-            var successMessage = document.querySelector('.success-message');
-            var errorMessage = document.querySelector('.error-message');
-            if (successMessage) {
-                successMessage.style.display = 'none';
-            }
-            if (errorMessage) {
-                errorMessage.style.display = 'none';
-            }
-        }, 5000);
+        function filterByCategory() {
+            let category = document.getElementById('category-select').value;
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'api/filter_products.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = function () {
+                if (this.status === 200) {
+                    document.getElementById('products-container').innerHTML = this.responseText;
+                    disableAddToCartButtons();
+                }
+            };
+            xhr.send('categoria_nome=' + encodeURIComponent(category));
+        }
+
+        function disableAddToCartButtons() {
+            const currentDay = new Date().getDay();
+            const addToCartButtons = document.querySelectorAll(".add-to-cart");
+
+            addToCartButtons.forEach(button => {
+                if (currentDay < 1 || currentDay > 3) {
+                    button.disabled = true;
+                    button.style.backgroundColor = "#ccc";
+                    button.style.cursor = "not-allowed";
+                }
+            });
+        }
     </script>
 </body>
 

@@ -2,7 +2,7 @@
 session_start();
 include 'database/recall.php';
 
-$errore = ""; // Variabile per mostrare eventuali errori
+$errore = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
